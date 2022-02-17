@@ -14,6 +14,7 @@ import org.bukkit.Location;
 import org.bukkit.Particle;
 import org.bukkit.Sound;
 import org.bukkit.entity.Entity;
+import org.bukkit.util.Vector;
 
 /**
  * @author NickM13
@@ -39,8 +40,8 @@ public class OffensiveMeltingBurst extends AbilityOffensive {
         }
 
         @Override
-        protected boolean onBlockHit(Entity craftEntity, BlockRaycastResult blockRaycastResult) {
-            super.blockBounce(craftEntity, blockRaycastResult);
+        protected boolean onBlockHit(Entity craftEntity, BlockRaycastResult blockRaycastResult, Vector intersection) {
+            super.blockBounce(craftEntity, blockRaycastResult, intersection);
             return true;
         }
 
@@ -61,7 +62,7 @@ public class OffensiveMeltingBurst extends AbilityOffensive {
         }
     }
 
-    private static ProjectileStats projectileStats = new ProjectileStats();
+    private static final ProjectileStats projectileStats = new ProjectileStats();
 
     static {
         projectileStats.entityClass = MeltingProjectile.class;

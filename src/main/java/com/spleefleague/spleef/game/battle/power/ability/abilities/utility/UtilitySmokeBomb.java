@@ -15,6 +15,7 @@ import org.bukkit.Location;
 import org.bukkit.Sound;
 import org.bukkit.entity.Entity;
 import org.bukkit.potion.PotionEffectType;
+import org.bukkit.util.Vector;
 
 /**
  * @author NickM13
@@ -61,8 +62,8 @@ public class UtilitySmokeBomb extends AbilityUtility {
         }
 
         @Override
-        protected boolean onBlockHit(Entity craftEntity, BlockRaycastResult blockRaycastResult) {
-            super.blockBounce(craftEntity, blockRaycastResult);
+        protected boolean onBlockHit(Entity craftEntity, BlockRaycastResult blockRaycastResult, Vector intersection) {
+            super.blockBounce(craftEntity, blockRaycastResult, intersection);
             if (!activated) {
                 activated = true;
                 this.lifeTicks = craftEntity.getTicksLived() + (int) (DURATION * 20);

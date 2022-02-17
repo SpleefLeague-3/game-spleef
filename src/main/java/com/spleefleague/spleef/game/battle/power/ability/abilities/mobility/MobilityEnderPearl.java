@@ -13,6 +13,7 @@ import org.bukkit.Location;
 import org.bukkit.Particle;
 import org.bukkit.Sound;
 import org.bukkit.entity.Entity;
+import org.bukkit.util.Vector;
 
 /**
  * @author NickM13
@@ -42,7 +43,7 @@ public class MobilityEnderPearl extends AbilityMobility {
         }
 
         @Override
-        protected boolean onBlockHit(Entity craftEntity, BlockRaycastResult blockRaycastResult) {
+        protected boolean onBlockHit(Entity craftEntity, BlockRaycastResult blockRaycastResult, Vector intersection) {
             cpShooter.teleport(blockRaycastResult.getRelative().toLocation(cpShooter.getPlayer().getWorld()).add(0.5, 0.5, 0.5));
             projectileWorld.playSound(blockRaycastResult.getIntersection().toLocation(projectileWorld.getWorld()), Sound.ENTITY_ENDERMAN_TELEPORT, 1, 1.5f);
             projectileWorld.spawnParticles(Particle.REDSTONE,

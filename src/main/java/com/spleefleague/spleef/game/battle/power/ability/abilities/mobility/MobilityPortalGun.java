@@ -13,6 +13,7 @@ import com.spleefleague.spleef.game.battle.power.ability.abilities.AbilityMobili
 import org.bukkit.Location;
 import org.bukkit.craftbukkit.v1_15_R1.entity.CraftEntity;
 import org.bukkit.entity.Entity;
+import org.bukkit.util.Vector;
 
 /**
  * @author NickM13
@@ -35,7 +36,7 @@ public class MobilityPortalGun extends AbilityMobility {
         }
 
         @Override
-        protected boolean onBlockHit(Entity craftEntity, BlockRaycastResult blockRaycastResult) {
+        protected boolean onBlockHit(Entity craftEntity, BlockRaycastResult blockRaycastResult, Vector intersection) {
             ((GameWorld) projectileWorld).createPortal(cpShooter, blockRaycastResult.getBlockPos(), blockRaycastResult.getFace());
             killEntity();
             return true;

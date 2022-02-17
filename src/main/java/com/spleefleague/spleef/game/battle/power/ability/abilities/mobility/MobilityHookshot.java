@@ -95,7 +95,7 @@ public class MobilityHookshot extends AbilityMobility {
         }
 
         @Override
-        protected boolean onBlockHit(Entity craftEntity, BlockRaycastResult blockRaycastResult) {
+        protected boolean onBlockHit(Entity craftEntity, BlockRaycastResult blockRaycastResult, Vector intersection) {
             if (!isHooked()) {
                 craftEntity.setGravity(false);
                 craftEntity.setVelocity(new Vector(0, 0, 0));

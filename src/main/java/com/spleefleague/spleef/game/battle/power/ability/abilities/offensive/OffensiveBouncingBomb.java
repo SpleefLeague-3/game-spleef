@@ -13,6 +13,7 @@ import org.bukkit.Location;
 import org.bukkit.Particle;
 import org.bukkit.Sound;
 import org.bukkit.entity.Entity;
+import org.bukkit.util.Vector;
 
 /**
  * @author NickM13
@@ -42,8 +43,8 @@ public class OffensiveBouncingBomb extends AbilityOffensive {
         }
 
         @Override
-        protected boolean onBlockHit(Entity craftEntity, BlockRaycastResult blockRaycastResult) {
-            if (super.onBlockHit(craftEntity, blockRaycastResult)) {
+        protected boolean onBlockHit(Entity craftEntity, BlockRaycastResult blockRaycastResult, Vector intersection) {
+            if (super.onBlockHit(craftEntity, blockRaycastResult, intersection)) {
                 projectileWorld.spawnParticles(Particle.REDSTONE,
                         blockRaycastResult.getIntersection().getX(),
                         blockRaycastResult.getIntersection().getY(),

@@ -65,12 +65,12 @@ public class OffensiveBoomerang extends AbilityOffensive {
         }
 
         @Override
-        protected boolean blockBounce(Entity craftEntity, BlockRaycastResult blockRaycastResult) {
+        protected boolean blockBounce(Entity craftEntity, BlockRaycastResult blockRaycastResult, Vector intersection) {
             return false;
         }
 
         @Override
-        protected boolean onBlockHit(Entity craftEntity, BlockRaycastResult blockRaycastResult) {
+        protected boolean onBlockHit(Entity craftEntity, BlockRaycastResult blockRaycastResult, Vector intersection) {
             return false;
         }
 
