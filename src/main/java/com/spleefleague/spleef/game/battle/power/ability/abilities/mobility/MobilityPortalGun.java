@@ -1,6 +1,5 @@
 package com.spleefleague.spleef.game.battle.power.ability.abilities.mobility;
 
-import com.comphenix.protocol.wrappers.BlockPosition;
 import com.google.common.collect.Lists;
 import com.spleefleague.core.player.CorePlayer;
 import com.spleefleague.core.util.variable.BlockRaycastResult;
@@ -11,7 +10,6 @@ import com.spleefleague.core.world.game.projectile.ProjectileWorld;
 import com.spleefleague.spleef.game.battle.power.ability.AbilityStats;
 import com.spleefleague.spleef.game.battle.power.ability.abilities.AbilityMobility;
 import org.bukkit.Location;
-import org.bukkit.craftbukkit.v1_15_R1.entity.CraftEntity;
 import org.bukkit.entity.Entity;
 import org.bukkit.util.Vector;
 
