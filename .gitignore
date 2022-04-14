@@ -4,6 +4,8 @@ target/
 
 # Log file
 *.log
+*.xml
+*.iml
 
 # Script files
 *.bat
