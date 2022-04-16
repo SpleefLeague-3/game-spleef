@@ -29,8 +29,8 @@ public class ClassicSpleefAffixes {
         DECAY("Decay", AffixDecay.class),
         THUNDERDOME("Thunderdome", AffixThunderdome.class);
 
-        public String displayName;
-        public Class<? extends ClassicSpleefAffix> clazz;
+        public final String displayName;
+        public final Class<? extends ClassicSpleefAffix> clazz;
 
         AffixType(String displayName, Class<? extends ClassicSpleefAffix> clazz) {
             this.displayName = displayName;
@@ -110,7 +110,9 @@ public class ClassicSpleefAffixes {
 
         for (AffixType type : activeAffixes) {
             try {
-                affixes.add(type.clazz.getConstructor().newInstance());
+                ClassicSpleefAffix affix = type.clazz.getConstructor().newInstance();
+                affix.setBattle(battle);
+                affixes.add(affix);
             } catch (InstantiationException | IllegalAccessException | InvocationTargetException | NoSuchMethodException e) {
                 e.printStackTrace();
             }
