@@ -9,9 +9,9 @@ pipeline {
         }
         stage('Deploy') {
             steps {
-                sh "mkdir -p /mnt/jenkins/Core"
+                sh "mkdir -p /mnt/jenkins/Spleef"
                 sh "rm ./target/original*"
-                sh "cp ./target/*.jar /mnt/jenkins/Core/"
+                sh "cp ./target/*.jar /mnt/jenkins/Spleef/"
             }
         }
     }
