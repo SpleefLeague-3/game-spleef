@@ -1,19 +1,10 @@
 package com.spleefleague.spleef.game.battle.power.ability.abilities.mobility;
 
 import com.google.common.collect.Lists;
-import com.spleefleague.core.player.CorePlayer;
-import com.spleefleague.core.util.variable.BlockRaycastResult;
-import com.spleefleague.core.world.game.GameWorld;
-import com.spleefleague.core.world.game.projectile.FakeEntitySnowball;
-import com.spleefleague.core.world.game.projectile.ProjectileStats;
-import com.spleefleague.core.world.game.projectile.ProjectileWorld;
+import com.spleefleague.core.world.projectile.ProjectileStats;
+import com.spleefleague.core.world.projectile.projectiles.EnderPearlProjectile;
 import com.spleefleague.spleef.game.battle.power.ability.AbilityStats;
 import com.spleefleague.spleef.game.battle.power.ability.abilities.AbilityMobility;
-import org.bukkit.Location;
-import org.bukkit.Particle;
-import org.bukkit.Sound;
-import org.bukkit.entity.Entity;
-import org.bukkit.util.Vector;
 
 /**
  * @author NickM13
@@ -30,32 +21,6 @@ public class MobilityEnderPearl extends AbilityMobility {
     }
 
     private static final ProjectileStats pearlStats = new ProjectileStats();
-
-    public static class EnderPearlProjectile extends FakeEntitySnowball {
-
-        public EnderPearlProjectile(ProjectileWorld projectileWorld, CorePlayer shooter, Location location, ProjectileStats projectileStats, Double charge) {
-            super(projectileWorld, shooter, location, projectileStats, charge);
-        }
-
-        @Override
-        public void tick() {
-            super.tick();
-        }
-
-        @Override
-        protected boolean onBlockHit(Entity craftEntity, BlockRaycastResult blockRaycastResult, Vector intersection) {
-            cpShooter.teleport(blockRaycastResult.getRelative().toLocation(cpShooter.getPlayer().getWorld()).add(0.5, 0.5, 0.5));
-            projectileWorld.playSound(blockRaycastResult.getIntersection().toLocation(projectileWorld.getWorld()), Sound.ENTITY_ENDERMAN_TELEPORT, 1, 1.5f);
-            projectileWorld.spawnParticles(Particle.REDSTONE,
-                    blockRaycastResult.getIntersection().getX(),
-                    blockRaycastResult.getIntersection().getY(),
-                    blockRaycastResult.getIntersection().getZ(),
-                    40, 1, 1, 1, 0D, Type.MOBILITY.getDustMedium());
-            killEntity();
-            return true;
-        }
-
-    }
 
     static {
         pearlStats.entityClass = EnderPearlProjectile.class;
@@ -79,8 +44,8 @@ public class MobilityEnderPearl extends AbilityMobility {
      */
     @Override
     public void reset() {
-        if (projectile != null && projectile.isAlive()) {
-            projectile.killEntity();
+        if (projectile != null && !projectile.getBukkitEntity().isDead()) {
+            projectile.getBukkitEntity().remove();
         }
     }
 

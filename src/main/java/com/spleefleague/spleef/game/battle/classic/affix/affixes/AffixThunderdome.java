@@ -1,10 +1,6 @@
 package com.spleefleague.spleef.game.battle.classic.affix.affixes;
 
-import com.comphenix.protocol.PacketType;
-import com.comphenix.protocol.events.PacketContainer;
-import com.comphenix.protocol.wrappers.BlockPosition;
-import com.spleefleague.core.world.FakeUtils;
-import com.spleefleague.core.world.build.BuildStructure;
+import com.spleefleague.core.world.FakeUtil;
 import com.spleefleague.core.world.build.BuildStructures;
 import com.spleefleague.spleef.game.battle.classic.ClassicSpleefBattle;
 import com.spleefleague.spleef.game.battle.classic.ClassicSpleefPlayer;
@@ -28,8 +24,8 @@ public class AffixThunderdome extends ClassicSpleefAffixFuture {
     @Override
     public void activate(ClassicSpleefBattle battle) {
         battle.getGameWorld().overwriteBlocks(
-                FakeUtils.translateBlocks(
-                        FakeUtils.rotateBlocks(
+                FakeUtil.translateBlocks(
+                        FakeUtil.rotateBlocks(
                                 BuildStructures.get("ThunderDome").getFakeBlocks(),
                                 (int) battle.getArena().getOrigin().getYaw()),
                 battle.getArena().getOrigin().toBlockPosition()));

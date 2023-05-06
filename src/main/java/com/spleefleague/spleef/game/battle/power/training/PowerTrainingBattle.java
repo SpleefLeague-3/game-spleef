@@ -14,17 +14,16 @@ import com.spleefleague.core.music.NoteBlockMusic;
 import com.spleefleague.core.player.CorePlayer;
 import com.spleefleague.core.util.variable.Dimension;
 import com.spleefleague.core.world.FakeBlock;
-import com.spleefleague.core.world.FakeUtils;
+import com.spleefleague.core.world.FakeUtil;
 import com.spleefleague.core.world.FakeWorld;
 import com.spleefleague.core.world.build.BuildStructure;
 import com.spleefleague.core.world.build.BuildStructures;
+import com.spleefleague.coreapi.chat.ChatColor;
 import com.spleefleague.spleef.Spleef;
 import com.spleefleague.spleef.game.SpleefMode;
 import com.spleefleague.spleef.game.battle.power.ability.Ability;
 import com.spleefleague.spleef.util.SpleefUtils;
 import org.bukkit.Bukkit;
-import org.bukkit.ChatColor;
-import org.bukkit.Material;
 
 import java.util.List;
 import java.util.Map;
@@ -77,8 +76,8 @@ public class PowerTrainingBattle extends SoloBattle<PowerTrainingPlayer> {
         currField = BuildStructures.getAll("spleef:power").get(currFieldIndex);
         gameWorld.clearBaseBlocks();
         gameWorld.setBaseBlocks(
-                FakeUtils.translateBlocks(
-                        FakeUtils.rotateBlocks(currField.getFakeBlocks(), (int) getArena().getOrigin().getYaw()),
+                FakeUtil.translateBlocks(
+                        FakeUtil.rotateBlocks(currField.getFakeBlocks(), (int) getArena().getOrigin().getYaw()),
                         getArena().getOrigin().toBlockPosition()));
     }
 
@@ -213,7 +212,7 @@ public class PowerTrainingBattle extends SoloBattle<PowerTrainingPlayer> {
         }
         pos = pos.add(new BlockPosition(0, 15, 0));
         BuildStructure platform = BuildStructures.get("power:respawn");
-        Map<BlockPosition, FakeBlock> transformed = FakeUtils.translateBlocks(platform.getFakeBlocks(), pos);
+        Map<BlockPosition, FakeBlock> transformed = FakeUtil.translateBlocks(platform.getFakeBlocks(), pos);
         getGameWorld().setBlocks(transformed);
         for (Map.Entry<BlockPosition, FakeBlock> entry : transformed.entrySet()) {
             getGameWorld().setBlockDelayed(entry.getKey(), FakeWorld.AIR, 6 * 20);
@@ -238,7 +237,7 @@ public class PowerTrainingBattle extends SoloBattle<PowerTrainingPlayer> {
 
         for (Map.Entry<BlockPosition, FakeBlock> baseBlock : gameWorld.getBaseBlocks().entrySet()) {
             FakeBlock fakeBlock = gameWorld.getFakeBlock(baseBlock.getKey());
-            if (fakeBlock == null || fakeBlock.getBlockData().getMaterial() != baseBlock.getValue().getBlockData().getMaterial()) {
+            if (fakeBlock == null || fakeBlock.blockData().getMaterial() != baseBlock.getValue().blockData().getMaterial()) {
                 gameWorld.setBlockDelayed(baseBlock.getKey(), baseBlock.getValue(), (int) (Math.random() * 60));
             }
         }

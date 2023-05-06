@@ -1,19 +1,15 @@
 package com.spleefleague.spleef.util;
 
 import com.comphenix.protocol.wrappers.BlockPosition;
-import com.spleefleague.core.game.Arena;
 import com.spleefleague.core.game.battle.Battle;
-import com.spleefleague.core.player.CorePlayer;
 import com.spleefleague.core.world.FakeBlock;
-import com.spleefleague.core.world.FakeUtils;
+import com.spleefleague.core.world.FakeUtil;
 import com.spleefleague.core.world.build.BuildStructure;
-import com.spleefleague.core.world.game.GameWorld;
+import com.spleefleague.core.world.projectile.game.GameWorld;
 import org.bukkit.GameMode;
 import org.bukkit.Material;
-import org.bukkit.inventory.ItemStack;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
@@ -54,8 +50,8 @@ public class SpleefUtils {
         gameWorld.clear();
         for (BuildStructure structure : battle.getArena().getStructures()) {
             gameWorld.overwriteBlocks(
-                    FakeUtils.translateBlocks(
-                            FakeUtils.rotateBlocks(structure.getFakeBlocks(), (int) battle.getArena().getOrigin().getYaw()),
+                    FakeUtil.translateBlocks(
+                            FakeUtil.rotateBlocks(structure.getFakeBlocks(), (int) battle.getArena().getOrigin().getYaw()),
                             battle.getArena().getOrigin().toBlockPosition()));
         }
     }
@@ -73,8 +69,8 @@ public class SpleefUtils {
             toMerge.add(field.getFakeBlocks());
         }
         gameWorld.overwriteBlocks(
-                FakeUtils.translateBlocks(
-                        FakeUtils.rotateBlocks(FakeUtils.mergeBlocks(toMerge), (int) battle.getArena().getOrigin().getYaw()),
+                FakeUtil.translateBlocks(
+                        FakeUtil.rotateBlocks(FakeUtil.mergeBlocks(toMerge), (int) battle.getArena().getOrigin().getYaw()),
                         battle.getArena().getOrigin().toBlockPosition()));
     }
 
@@ -99,15 +95,15 @@ public class SpleefUtils {
         }
         if (overwrite) {
             gameWorld.overwriteBlocks(
-                    FakeUtils.translateBlocks(
-                            FakeUtils.rotateBlocks(FakeUtils.mergeBlocks(toMerge), (int) battle.getArena().getOrigin().getYaw()),
+                    FakeUtil.translateBlocks(
+                            FakeUtil.rotateBlocks(FakeUtil.mergeBlocks(toMerge), (int) battle.getArena().getOrigin().getYaw()),
                             battle.getArena().getOrigin().toBlockPosition()));
         } else {
-            Map<BlockPosition, FakeBlock> fakeBlocks = FakeUtils.translateBlocks(
-                    FakeUtils.rotateBlocks(FakeUtils.mergeBlocks(toMerge), (int) battle.getArena().getOrigin().getYaw()),
+            Map<BlockPosition, FakeBlock> fakeBlocks = FakeUtil.translateBlocks(
+                    FakeUtil.rotateBlocks(FakeUtil.mergeBlocks(toMerge), (int) battle.getArena().getOrigin().getYaw()),
                     battle.getArena().getOrigin().toBlockPosition());
             for (Map.Entry<BlockPosition, FakeBlock> entry : fakeBlocks.entrySet()) {
-                gameWorld.setBlockDelayed(entry.getKey(), entry.getValue().getBlockData(), 5, battle.getArena().getSpawns());
+                gameWorld.setBlockDelayed(entry.getKey(), entry.getValue().blockData(), 5, battle.getArena().getSpawns());
             }
         }
     }

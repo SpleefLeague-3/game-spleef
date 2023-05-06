@@ -3,15 +3,14 @@ package com.spleefleague.spleef.game.battle.power.ability.abilities.offensive;
 import com.google.common.collect.Lists;
 import com.spleefleague.core.player.CorePlayer;
 import com.spleefleague.core.util.variable.EntityRaycastResult;
-import com.spleefleague.core.world.game.GameWorld;
-import com.spleefleague.core.world.game.projectile.FakeEntitySnowball;
-import com.spleefleague.core.world.game.projectile.ProjectileStats;
-import com.spleefleague.core.world.game.projectile.ProjectileWorld;
+import com.spleefleague.core.world.projectile.FakeEntitySnowball;
+import com.spleefleague.core.world.projectile.ProjectileStats;
+import com.spleefleague.core.world.projectile.ProjectileWorld;
+import com.spleefleague.core.world.projectile.ProjectileWorldPlayer;
 import com.spleefleague.spleef.game.battle.power.ability.AbilityStats;
 import com.spleefleague.spleef.game.battle.power.ability.abilities.AbilityOffensive;
-import net.minecraft.server.v1_15_R1.MovingObjectPosition;
+import net.minecraft.world.phys.MovingObjectPosition;
 import org.bukkit.Location;
-import org.bukkit.entity.Entity;
 import org.bukkit.util.Vector;
 
 /**
@@ -33,20 +32,20 @@ public class OffensiveYoink extends AbilityOffensive {
 
     public static class YoinkProjectile extends FakeEntitySnowball {
 
-        public YoinkProjectile(ProjectileWorld projectileWorld, CorePlayer shooter, Location location, ProjectileStats projectileStats, Double charge) {
+        public YoinkProjectile(ProjectileWorld<? extends ProjectileWorldPlayer> projectileWorld, CorePlayer shooter, Location location, ProjectileStats projectileStats, Double charge) {
             super(projectileWorld, shooter, location, projectileStats, charge);
         }
 
         @Override
         protected void a(MovingObjectPosition var0) {
-            if (!noclip) {
+            if (!projectileStats.noClip) {
                 super.a(var0);
             }
         }
 
         @Override
-        protected void onEntityHit(Entity craftEntity, EntityRaycastResult entityRaycastResult) {
-            killEntity();
+        protected void onEntityHit(EntityRaycastResult entityRaycastResult) {
+            getBukkitEntity().remove();
             Vector dir = cpShooter.getLocation().toVector().subtract(entityRaycastResult.getEntity().getLocation().toVector());
             dir.setY(0);
             double dist = dir.length();
@@ -56,7 +55,7 @@ public class OffensiveYoink extends AbilityOffensive {
 
     }
 
-    private static ProjectileStats projectileStats = new ProjectileStats();
+    private static final ProjectileStats projectileStats = new ProjectileStats();
 
     static {
         projectileStats.entityClass = YoinkProjectile.class;

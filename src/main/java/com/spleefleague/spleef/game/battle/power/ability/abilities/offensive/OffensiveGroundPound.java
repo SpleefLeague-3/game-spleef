@@ -1,17 +1,13 @@
 package com.spleefleague.spleef.game.battle.power.ability.abilities.offensive;
 
 import com.comphenix.protocol.wrappers.BlockPosition;
-import com.google.common.collect.Lists;
-import com.spleefleague.core.util.variable.Position;
-import com.spleefleague.core.world.FakeUtils;
-import com.spleefleague.core.world.game.GameUtils;
+import com.spleefleague.core.world.FakeUtil;
+import com.spleefleague.core.world.projectile.game.GameUtils;
 import com.spleefleague.spleef.game.battle.power.ability.AbilityStats;
 import com.spleefleague.spleef.game.battle.power.ability.abilities.AbilityOffensive;
 import org.bukkit.Location;
-import org.bukkit.Material;
 import org.bukkit.Sound;
 
-import java.util.List;
 import java.util.Set;
 
 /**
@@ -41,7 +37,7 @@ public class OffensiveGroundPound extends AbilityOffensive {
                 forClone.getBlockX(),
                 forClone.getBlockY() - 1,
                 forClone.getBlockZ());
-        Set<BlockPosition> blocks = FakeUtils.createCone(forward.getDirection().clone(), 6, 5);
+        Set<BlockPosition> blocks = FakeUtil.createCone(forward.getDirection().clone(), 6, 5);
         GameUtils.spawnRingParticles(
                         getUser().getBattle().getGameWorld(),
                         getPlayer().getLocation().toVector(),

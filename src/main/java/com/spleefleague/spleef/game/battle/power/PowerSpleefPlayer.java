@@ -3,12 +3,14 @@ package com.spleefleague.spleef.game.battle.power;
 import com.comphenix.protocol.wrappers.BlockPosition;
 import com.spleefleague.core.game.battle.Battle;
 import com.spleefleague.core.game.battle.BattlePlayer;
+import com.spleefleague.core.logger.CoreLogger;
 import com.spleefleague.core.player.CorePlayer;
 import com.spleefleague.core.world.FakeBlock;
-import com.spleefleague.core.world.FakeUtils;
+import com.spleefleague.core.world.FakeUtil;
 import com.spleefleague.core.world.FakeWorld;
 import com.spleefleague.core.world.build.BuildStructure;
 import com.spleefleague.core.world.build.BuildStructures;
+import com.spleefleague.coreapi.chat.ChatColor;
 import com.spleefleague.spleef.Spleef;
 import com.spleefleague.spleef.game.battle.SpleefBattlePlayer;
 import com.spleefleague.spleef.game.battle.power.ability.Abilities;
@@ -17,13 +19,9 @@ import com.spleefleague.spleef.game.battle.power.ability.AbilityStats;
 import com.spleefleague.spleef.game.battle.power.ability.abilities.AbilityMobility;
 import com.spleefleague.spleef.game.battle.power.ability.abilities.AbilityOffensive;
 import com.spleefleague.spleef.game.battle.power.ability.abilities.AbilityUtility;
-import com.spleefleague.spleef.player.SpleefPlayer;
-import org.bukkit.ChatColor;
 import org.bukkit.Location;
-import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
 
-import java.lang.reflect.InvocationTargetException;
 import java.util.*;
 
 /**
@@ -116,7 +114,7 @@ public class PowerSpleefPlayer extends SpleefBattlePlayer {
         resetCooldowns();
         BlockPosition pos = new BlockPosition(getSpawn().getBlockX(), getSpawn().getBlockY() + 15, getSpawn().getBlockZ());
         BuildStructure platform = BuildStructures.get("power:respawn");
-        Map<BlockPosition, FakeBlock> transformed = FakeUtils.translateBlocks(platform.getFakeBlocks(), pos);
+        Map<BlockPosition, FakeBlock> transformed = FakeUtil.translateBlocks(platform.getFakeBlocks(), pos);
         getBattle().getGameWorld().setBlocks(transformed);
         for (Map.Entry<BlockPosition, FakeBlock> entry : transformed.entrySet()) {
             getBattle().getGameWorld().setBlockDelayed(entry.getKey(), FakeWorld.AIR, 6 * 20);
@@ -240,10 +238,11 @@ public class PowerSpleefPlayer extends SpleefBattlePlayer {
         updateAbilities(Ability.Type.OFFENSIVE);
         updateAbilities(Ability.Type.UTILITY);
 
-        getCorePlayer().sendHotbarText(
-                        toHotbarString(ChatColor.RED   + "" + ChatColor.BOLD + "" + ChatColor.ITALIC, offensive) + "  " +
-                        toHotbarString(ChatColor.BLUE  + "" + ChatColor.BOLD + "" + ChatColor.ITALIC, utility)   + "  " +
-                        toHotbarString(ChatColor.GREEN + "" + ChatColor.BOLD + "" + ChatColor.ITALIC, mobility));
+        String hotbarText = toHotbarString(ChatColor.RED   + "" + ChatColor.BOLD + "" + ChatColor.ITALIC, offensive) + "  " +
+                toHotbarString(ChatColor.BLUE  + "" + ChatColor.BOLD + "" + ChatColor.ITALIC, utility)   + "  " +
+                toHotbarString(ChatColor.GREEN + "" + ChatColor.BOLD + "" + ChatColor.ITALIC, mobility);
+
+        getCorePlayer().sendHotbarText(hotbarText);
     }
 
     @Override

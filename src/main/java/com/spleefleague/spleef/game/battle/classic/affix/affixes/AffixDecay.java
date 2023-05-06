@@ -3,17 +3,14 @@ package com.spleefleague.spleef.game.battle.classic.affix.affixes;
 import com.comphenix.protocol.wrappers.BlockPosition;
 import com.spleefleague.core.world.FakeBlock;
 import com.spleefleague.core.world.FakeWorld;
-import com.spleefleague.core.world.build.BuildStructure;
 import com.spleefleague.spleef.game.battle.classic.ClassicSpleefBattle;
 import com.spleefleague.spleef.game.battle.classic.affix.ClassicSpleefAffixFuture;
 import com.spleefleague.spleef.game.battle.classic.affix.ClassicSpleefAffixes;
 import org.bukkit.Material;
-import org.bukkit.block.data.BlockData;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
-import java.util.Set;
 
 /**
  * @author NickM13
@@ -43,7 +40,7 @@ public class AffixDecay extends ClassicSpleefAffixFuture {
             if (baseBlocks.isEmpty()) return;
             BlockPosition randomPos = baseBlocks.get(new Random().nextInt(baseBlocks.size()));
             FakeBlock fb = battle.getGameWorld().getFakeBlock(randomPos);
-            if (fb != null && !fb.getBlockData().getMaterial().isAir()) {
+            if (fb != null && !fb.blockData().getMaterial().isAir()) {
                 battle.getGameWorld().setBlock(randomPos, INDICATOR);
                 battle.getGameWorld().setBlockDelayed(randomPos, FakeWorld.AIR, 20L);
             }

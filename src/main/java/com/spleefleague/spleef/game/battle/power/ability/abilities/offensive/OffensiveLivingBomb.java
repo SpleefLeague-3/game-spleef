@@ -4,9 +4,8 @@ import com.comphenix.protocol.wrappers.BlockPosition;
 import com.google.common.collect.Lists;
 import com.spleefleague.core.game.battle.BattlePlayer;
 import com.spleefleague.core.util.CoreUtils;
-import com.spleefleague.core.world.game.GameUtils;
-import com.spleefleague.core.world.game.GameWorld;
-import com.spleefleague.core.world.game.projectile.ProjectileStats;
+import com.spleefleague.core.world.projectile.ProjectileStats;
+import com.spleefleague.core.world.projectile.game.GameUtils;
 import com.spleefleague.spleef.Spleef;
 import com.spleefleague.spleef.game.battle.power.ability.AbilityStats;
 import com.spleefleague.spleef.game.battle.power.ability.AbilityUtils;
@@ -15,9 +14,6 @@ import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.Sound;
 import org.bukkit.util.Vector;
-
-import java.util.HashSet;
-import java.util.Set;
 
 /**
  * @author NickM13
@@ -33,7 +29,7 @@ public class OffensiveLivingBomb extends AbilityOffensive {
                 .setUsage(15);
     }
 
-    private static ProjectileStats projectileStats = new ProjectileStats();
+    private static final ProjectileStats projectileStats = new ProjectileStats();
 
     static {
         projectileStats.lifeTicks = 100;

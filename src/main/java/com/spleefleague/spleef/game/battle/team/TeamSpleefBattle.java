@@ -11,12 +11,12 @@ import com.spleefleague.core.game.Arena;
 import com.spleefleague.core.game.BattleUtils;
 import com.spleefleague.core.game.battle.team.TeamBattle;
 import com.spleefleague.core.game.battle.team.TeamBattleTeam;
-import com.spleefleague.core.world.FakeUtils;
+import com.spleefleague.core.world.FakeUtil;
 import com.spleefleague.core.world.build.BuildStructure;
+import com.spleefleague.coreapi.chat.ChatColor;
 import com.spleefleague.spleef.Spleef;
 import com.spleefleague.spleef.game.SpleefMode;
 import com.spleefleague.spleef.util.SpleefUtils;
-import org.bukkit.ChatColor;
 
 import java.util.List;
 import java.util.UUID;
@@ -38,8 +38,8 @@ public class TeamSpleefBattle extends TeamBattle<TeamSpleefPlayer> {
         SpleefUtils.setupBaseSettings(this);
         for (BuildStructure structure : arena.getStructures()) {
             gameWorld.setBaseBlocks(
-                    FakeUtils.translateBlocks(
-                            FakeUtils.rotateBlocks(structure.getFakeBlocks(), (int) getArena().getOrigin().getYaw()),
+                    FakeUtil.translateBlocks(
+                            FakeUtil.rotateBlocks(structure.getFakeBlocks(), (int) getArena().getOrigin().getYaw()),
                             getArena().getOrigin().toBlockPosition()));
         }
         playToPoints = 5;

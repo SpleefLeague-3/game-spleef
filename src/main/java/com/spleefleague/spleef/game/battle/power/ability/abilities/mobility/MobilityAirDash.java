@@ -1,6 +1,6 @@
 package com.spleefleague.spleef.game.battle.power.ability.abilities.mobility;
 
-import com.spleefleague.core.world.FakeUtils;
+import com.spleefleague.core.world.FakeUtil;
 import com.spleefleague.spleef.Spleef;
 import com.spleefleague.spleef.game.battle.power.ability.AbilityStats;
 import com.spleefleague.spleef.game.battle.power.ability.abilities.AbilityMobility;
@@ -50,7 +50,7 @@ public class MobilityAirDash extends AbilityMobility {
         Location loc = getPlayer().getLocation().clone();
         loc.setPitch(Math.max(MIN_PITCH, Math.min(MAX_PITCH, loc.getPitch())));
         Vector direction = loc.getDirection().multiply(POWER);
-        if (!FakeUtils.isOnGround(getUser().getCorePlayer())) {
+        if (!getUser().getCorePlayer().isOnGround()) {
             direction = direction.multiply(AIR_MULTIPLIER);
         }
         getPlayer().setVelocity(direction);

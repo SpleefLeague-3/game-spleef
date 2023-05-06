@@ -4,16 +4,14 @@ import com.google.common.collect.Lists;
 import com.spleefleague.core.game.battle.BattlePlayer;
 import com.spleefleague.core.player.CorePlayer;
 import com.spleefleague.core.util.variable.BlockRaycastResult;
-import com.spleefleague.core.world.game.GameUtils;
-import com.spleefleague.core.world.game.GameWorld;
-import com.spleefleague.core.world.game.projectile.FakeEntitySnowball;
-import com.spleefleague.core.world.game.projectile.ProjectileStats;
-import com.spleefleague.core.world.game.projectile.ProjectileWorld;
+import com.spleefleague.core.world.projectile.FakeEntitySnowball;
+import com.spleefleague.core.world.projectile.ProjectileStats;
+import com.spleefleague.core.world.projectile.ProjectileWorld;
+import com.spleefleague.core.world.projectile.game.GameUtils;
 import com.spleefleague.spleef.game.battle.power.ability.AbilityStats;
 import com.spleefleague.spleef.game.battle.power.ability.abilities.AbilityUtility;
 import org.bukkit.Location;
 import org.bukkit.Sound;
-import org.bukkit.entity.Entity;
 import org.bukkit.potion.PotionEffectType;
 import org.bukkit.util.Vector;
 
@@ -43,13 +41,13 @@ public class UtilitySmokeBomb extends AbilityUtility {
         }
 
         @Override
-        public void tick() {
-            super.tick();
+        public void ao() {
+            super.ao();
             if (activated) {
                 Location loc = new Location(projectileWorld.getWorld(),
-                        getPositionVector().getX(),
-                        getPositionVector().getY() + 0.5,
-                        getPositionVector().getZ());
+                        getBukkitEntity().getVelocity().getX(),
+                        getBukkitEntity().getVelocity().getY() + 0.5,
+                        getBukkitEntity().getVelocity().getZ());
                 for (BattlePlayer bp : cpShooter.getBattle().getBattlers()) {
                     if (!bp.getCorePlayer().equals(cpShooter) &&
                             bp.getPlayer().getLocation().distance(loc) <= RANGE) {
@@ -62,11 +60,11 @@ public class UtilitySmokeBomb extends AbilityUtility {
         }
 
         @Override
-        protected boolean onBlockHit(Entity craftEntity, BlockRaycastResult blockRaycastResult, Vector intersection) {
-            super.blockBounce(craftEntity, blockRaycastResult, intersection);
+        protected boolean onBlockHit(BlockRaycastResult blockRaycastResult, Vector intersection) {
+            super.blockBounce(blockRaycastResult, intersection);
             if (!activated) {
                 activated = true;
-                this.lifeTicks = craftEntity.getTicksLived() + (int) (DURATION * 20);
+                this.lifeTicks = getBukkitEntity().getTicksLived() + (int) (DURATION * 20);
             }
             return true;
         }

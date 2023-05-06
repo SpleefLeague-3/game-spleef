@@ -1,7 +1,7 @@
 package com.spleefleague.spleef.game.battle.power.ability.abilities.mobility;
 
 import com.comphenix.protocol.wrappers.BlockPosition;
-import com.spleefleague.core.world.FakeUtils;
+import com.spleefleague.core.world.FakeUtil;
 import com.spleefleague.spleef.game.battle.power.ability.AbilityStats;
 import com.spleefleague.spleef.game.battle.power.ability.abilities.AbilityMobility;
 import org.bukkit.Particle;
@@ -49,13 +49,13 @@ public class MobilityJetpack extends AbilityMobility {
                 if (getPlayer().isSneaking()) {
                     getPlayer().setVelocity(getPlayer().getVelocity().setY(Math.max(getPlayer().getVelocity().getY() - DOWN_POWER, -DOWN_CAP)));
                     fuel = Math.max(0, fuel - CONSUME_FALL);
-                    if (FakeUtils.isOnGround(getUser().getCorePlayer())) {
+                    if (getUser().getCorePlayer().isOnGround()) {
                         disableJetpack();
                     } else {
                         getPlayer().setVelocity(getPlayer().getVelocity().add(getPlayer().getLocation().getDirection().setY(0).multiply(0.1D)));
                     }
                 } else {
-                    BlockPosition pos = FakeUtils.getHighestBlockBelow(getUser().getCorePlayer());
+                    BlockPosition pos = FakeUtil.getHighestBlockBelow(getUser().getCorePlayer());
                     getPlayer().setVelocity(getPlayer().getVelocity().add(getPlayer().getLocation().getDirection().setY(0).multiply(0.1D)));
                     if (getPlayer().getLocation().getY() - pos.getY() <= HEIGHT_CAP + 1) {
                         getPlayer().setVelocity(getPlayer().getVelocity().setY(Math.min(UP_CAP, getPlayer().getVelocity().getY() + UP_POWER)));
@@ -108,7 +108,7 @@ public class MobilityJetpack extends AbilityMobility {
         } else {
             if (fuel > 0) {
                 enableJetpack();
-                if (FakeUtils.isOnGround(getUser().getCorePlayer())) {
+                if (FakeUtil.isOnGround(getUser().getCorePlayer())) {
                     getPlayer().setVelocity(getPlayer().getLocation().getDirection().multiply(0.25).add(new Vector(0, 0.45D, 0)));
                     fuel -= 5;
                     getUser().getBattle().getGameWorld().playSound(getPlayer().getLocation(), Sound.ENTITY_GENERIC_EXPLODE, 0.5f, 1.5f);

@@ -12,15 +12,13 @@ import com.spleefleague.core.game.Arena;
 import com.spleefleague.core.game.BattleUtils;
 import com.spleefleague.core.game.battle.team.TeamBattle;
 import com.spleefleague.core.game.battle.team.TeamBattleTeam;
-import com.spleefleague.core.game.history.GameHistory;
 import com.spleefleague.core.player.CorePlayer;
 import com.spleefleague.core.world.FakeBlock;
-import com.spleefleague.core.world.FakeUtils;
+import com.spleefleague.core.world.FakeUtil;
 import com.spleefleague.core.world.build.BuildStructure;
 import com.spleefleague.spleef.Spleef;
 import com.spleefleague.spleef.game.Shovel;
 import com.spleefleague.spleef.game.SpleefMode;
-import com.spleefleague.spleef.game.battle.SpleefBattlePlayer;
 import com.spleefleague.spleef.game.battle.power.PowerSpleefPlayer;
 import com.spleefleague.spleef.util.SpleefUtils;
 import org.bukkit.Bukkit;
@@ -50,8 +48,8 @@ public class PowerSpleefTeamBattle extends TeamBattle<PowerSpleefPlayer> {
         randomField = arena.getRandomStructure("spleef:power");
         if (randomField != null) {
             gameWorld.setBaseBlocks(
-                    FakeUtils.translateBlocks(
-                            FakeUtils.rotateBlocks(randomField.getFakeBlocks(), (int) getArena().getOrigin().getYaw()),
+                    FakeUtil.translateBlocks(
+                            FakeUtil.rotateBlocks(randomField.getFakeBlocks(), (int) getArena().getOrigin().getYaw()),
                             getArena().getOrigin().toBlockPosition()));
         }
         gameWorld.setRegenSpeed(0.5);
@@ -120,7 +118,7 @@ public class PowerSpleefTeamBattle extends TeamBattle<PowerSpleefPlayer> {
     public void fillField() {
         for (Map.Entry<BlockPosition, FakeBlock> baseBlock : gameWorld.getBaseBlocks().entrySet()) {
             FakeBlock fakeBlock = gameWorld.getFakeBlock(baseBlock.getKey());
-            if (fakeBlock == null || fakeBlock.getBlockData().getMaterial() != baseBlock.getValue().getBlockData().getMaterial()) {
+            if (fakeBlock == null || fakeBlock.blockData().getMaterial() != baseBlock.getValue().blockData().getMaterial()) {
                 gameWorld.setBlockDelayed(baseBlock.getKey(), baseBlock.getValue(), (int) (Math.random() * 40));
             }
         }

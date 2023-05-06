@@ -3,8 +3,8 @@ package com.spleefleague.spleef.game.battle.power.ability.abilities.mobility;
 import com.comphenix.protocol.wrappers.BlockPosition;
 import com.google.common.collect.Sets;
 import com.spleefleague.core.world.FakeBlock;
-import com.spleefleague.core.world.FakeUtils;
-import com.spleefleague.core.world.game.GameWorld;
+import com.spleefleague.core.world.FakeUtil;
+import com.spleefleague.core.world.projectile.game.GameWorld;
 import com.spleefleague.spleef.game.battle.power.ability.AbilityStats;
 import com.spleefleague.spleef.game.battle.power.ability.abilities.AbilityMobility;
 import org.bukkit.Material;
@@ -43,7 +43,7 @@ public class MobilityRollerSpades extends AbilityMobility {
     public void update() {
         if (spadeTime >= 0) {
             if (spadeTime > getUser().getBattle().getRoundTime()) {
-                if (FakeUtils.isOnGround(getUser().getCorePlayer())) {
+                if (FakeUtil.isOnGround(getUser().getCorePlayer())) {
                     BoundingBox bb = getPlayer().getBoundingBox();
                     Set<BlockPosition> toCheck = Sets.newHashSet(
                             new BlockPosition((int) Math.floor(bb.getMinX()), (int) Math.floor(bb.getMinY() - 1), (int) Math.floor(bb.getMinZ())),
@@ -52,7 +52,7 @@ public class MobilityRollerSpades extends AbilityMobility {
                             new BlockPosition((int) Math.floor(bb.getMinX()), (int) Math.floor(bb.getMinY() - 1), (int) Math.floor(bb.getMaxZ())));
                     for (BlockPosition pos : toCheck) {
                         FakeBlock fb = getUser().getBattle().getGameWorld().getFakeBlock(pos);
-                        if (fb != null && getUser().getBattle().getGameWorld().getBreakables().contains(fb.getBlockData().getMaterial())) {
+                        if (fb != null && getUser().getBattle().getGameWorld().getBreakables().contains(fb.blockData().getMaterial())) {
                             getUser().getBattle().getGameWorld().setBlockDelayed(pos, MARKER, (int) (DELAY * 20));
                             marked.add(pos);
                         }

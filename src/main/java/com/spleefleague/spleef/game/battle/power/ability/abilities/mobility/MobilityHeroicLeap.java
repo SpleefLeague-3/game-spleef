@@ -3,14 +3,13 @@ package com.spleefleague.spleef.game.battle.power.ability.abilities.mobility;
 import com.comphenix.protocol.wrappers.BlockPosition;
 import com.spleefleague.core.util.variable.BlockRaycastResult;
 import com.spleefleague.core.util.variable.Point;
-import com.spleefleague.core.world.game.GameWorld;
-import com.spleefleague.spleef.game.battle.power.ability.Ability;
+import com.spleefleague.core.world.projectile.game.GameWorld;
 import com.spleefleague.spleef.game.battle.power.ability.AbilityStats;
 import com.spleefleague.spleef.game.battle.power.ability.AbilityUtils;
 import com.spleefleague.spleef.game.battle.power.ability.abilities.AbilityMobility;
 import org.bukkit.Location;
 import org.bukkit.Sound;
-import org.bukkit.craftbukkit.v1_15_R1.entity.CraftPlayer;
+import org.bukkit.craftbukkit.v1_19_R3.entity.CraftPlayer;
 import org.bukkit.util.Vector;
 
 import java.util.ArrayList;
@@ -60,7 +59,7 @@ public class MobilityHeroicLeap extends AbilityMobility {
                 lastLoc = newLoc;
                 if (collide != null) {
                     if (newLoc.distance(new Vector(collide.getX(), collide.getY(), collide.getZ())) > 0.1) {
-                        ((CraftPlayer) getPlayer()).getHandle().setPosition(collide.x, collide.y, collide.z);
+                        ((CraftPlayer) getPlayer()).getHandle().e(collide.x, collide.y, collide.z);
                     }
                     getPlayer().setVelocity(new Vector(0, 0, 0));
                     heroicLeaping = -1;
