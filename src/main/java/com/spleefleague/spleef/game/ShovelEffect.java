@@ -1,16 +1,14 @@
 package com.spleefleague.spleef.game;
 
 import com.spleefleague.core.player.CorePlayer;
-import com.spleefleague.core.world.game.GameUtils;
-import com.spleefleague.core.world.global.GlobalWorld;
+import com.spleefleague.core.world.projectile.game.GameUtils;
+import com.spleefleague.core.world.projectile.global.GlobalWorld;
 import com.spleefleague.coreapi.database.annotation.DBField;
 import com.spleefleague.coreapi.database.variable.DBEntity;
 import com.spleefleague.spleef.game.effects.*;
 import org.bukkit.Color;
 import org.bukkit.Material;
 import org.bukkit.Particle;
-import org.bukkit.Sound;
-import org.bukkit.util.Vector;
 
 import java.util.concurrent.atomic.AtomicInteger;
 

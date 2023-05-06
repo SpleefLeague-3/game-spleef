@@ -1,6 +1,6 @@
 package com.spleefleague.spleef.game.effects;
 
-import com.spleefleague.core.world.global.GlobalWorld;
+import com.spleefleague.core.world.projectile.global.GlobalWorld;
 import com.spleefleague.spleef.game.ShovelEffect;
 import org.bukkit.Location;
 import org.bukkit.Particle;

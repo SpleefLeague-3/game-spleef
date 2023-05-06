@@ -2,14 +2,12 @@ package com.spleefleague.spleef.game.battle.power.ability.abilities.utility;
 
 import com.comphenix.protocol.wrappers.BlockPosition;
 import com.spleefleague.core.world.FakeBlock;
-import com.spleefleague.core.world.FakeUtils;
+import com.spleefleague.core.world.FakeUtil;
 import com.spleefleague.spleef.game.battle.power.ability.AbilityStats;
 import com.spleefleague.spleef.game.battle.power.ability.abilities.AbilityUtility;
 import org.bukkit.Material;
 import org.bukkit.Particle;
 
-import java.util.HashMap;
-import java.util.Map;
 import java.util.Set;
 
 /**
@@ -35,11 +33,11 @@ public class UtilityArena extends AbilityUtility {
      */
     @Override
     public boolean onUse() {
-        BlockPosition blockPos = FakeUtils.getHighestFakeBlockBelow(getUser().getCorePlayer()).add(new BlockPosition(0, 1, 0));
+        BlockPosition blockPos = FakeUtil.getHighestFakeBlockBelow(getUser().getCorePlayer()).add(new BlockPosition(0, 1, 0));
         if (blockPos.getY() <= 1) {
             blockPos = new BlockPosition(blockPos.getX(), getUser().getCorePlayer().getLocation().getBlockY(), blockPos.getZ());
         }
-        Set<BlockPosition> blockPositions = FakeUtils.createCylinderShell(5, 4);
+        Set<BlockPosition> blockPositions = FakeUtil.createCylinderShell(5, 4);
         for (BlockPosition pos : blockPositions) {
             getUser().getBattle().getGameWorld().setBlockDelayed(pos.add(blockPos), new FakeBlock(Material.SNOW_BLOCK.createBlockData()), (pos.getY() + 1) * BUILD_TIME);
             getUser().getBattle().getGameWorld().addBlockDelayed(pos.add(blockPos), Material.AIR.createBlockData(), REMAIN_TIME * 20L - pos.getY() * DECAY_TIME);

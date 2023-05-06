@@ -3,14 +3,13 @@ package com.spleefleague.spleef.game.battle.power.ability.abilities.mobility;
 import com.google.common.collect.Lists;
 import com.spleefleague.core.player.CorePlayer;
 import com.spleefleague.core.util.variable.BlockRaycastResult;
-import com.spleefleague.core.world.game.GameWorld;
-import com.spleefleague.core.world.game.projectile.FakeEntitySnowball;
-import com.spleefleague.core.world.game.projectile.ProjectileStats;
-import com.spleefleague.core.world.game.projectile.ProjectileWorld;
+import com.spleefleague.core.world.projectile.FakeEntitySnowball;
+import com.spleefleague.core.world.projectile.ProjectileStats;
+import com.spleefleague.core.world.projectile.ProjectileWorld;
+import com.spleefleague.core.world.projectile.game.GameWorld;
 import com.spleefleague.spleef.game.battle.power.ability.AbilityStats;
 import com.spleefleague.spleef.game.battle.power.ability.abilities.AbilityMobility;
 import org.bukkit.Location;
-import org.bukkit.entity.Entity;
 import org.bukkit.util.Vector;
 
 /**
@@ -34,7 +33,7 @@ public class MobilityPortalGun extends AbilityMobility {
         }
 
         @Override
-        protected boolean onBlockHit(Entity craftEntity, BlockRaycastResult blockRaycastResult, Vector intersection) {
+        protected boolean onBlockHit(BlockRaycastResult blockRaycastResult, Vector intersection) {
             ((GameWorld) projectileWorld).createPortal(cpShooter, blockRaycastResult.getBlockPos(), blockRaycastResult.getFace());
             killEntity();
             return true;

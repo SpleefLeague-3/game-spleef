@@ -4,10 +4,10 @@ import com.comphenix.protocol.wrappers.BlockPosition;
 import com.google.common.collect.Lists;
 import com.spleefleague.core.player.CorePlayer;
 import com.spleefleague.core.util.variable.BlockRaycastResult;
-import com.spleefleague.core.world.game.GameWorld;
-import com.spleefleague.core.world.game.projectile.FakeEntitySnowball;
-import com.spleefleague.core.world.game.projectile.ProjectileStats;
-import com.spleefleague.core.world.game.projectile.ProjectileWorld;
+import com.spleefleague.core.world.projectile.FakeEntitySnowball;
+import com.spleefleague.core.world.projectile.ProjectileStats;
+import com.spleefleague.core.world.projectile.ProjectileWorld;
+import com.spleefleague.core.world.projectile.ProjectileWorldPlayer;
 import com.spleefleague.spleef.game.battle.power.ability.AbilityStats;
 import com.spleefleague.spleef.game.battle.power.ability.abilities.AbilityOffensive;
 import org.bukkit.Location;
@@ -35,18 +35,18 @@ public class OffensiveMeltingBurst extends AbilityOffensive {
 
     public static class MeltingProjectile extends FakeEntitySnowball {
 
-        public MeltingProjectile(ProjectileWorld projectileWorld, CorePlayer shooter, Location location, ProjectileStats projectileStats, Double charge) {
+        public MeltingProjectile(ProjectileWorld<? extends ProjectileWorldPlayer> projectileWorld, CorePlayer shooter, Location location, ProjectileStats projectileStats, Double charge) {
             super(projectileWorld, shooter, location, projectileStats, charge);
         }
 
         @Override
-        protected boolean onBlockHit(Entity craftEntity, BlockRaycastResult blockRaycastResult, Vector intersection) {
-            super.blockBounce(craftEntity, blockRaycastResult, intersection);
+        protected boolean onBlockHit(BlockRaycastResult blockRaycastResult, Vector intersection) {
+            super.blockBounce(blockRaycastResult, intersection);
             return true;
         }
 
         @Override
-        public void killEntity() {
+        public void a(RemovalReason entity_removalreason) {
             Entity craftEntity = getBukkitEntity();
             BlockPosition pos = new BlockPosition(
                     craftEntity.getLocation().getBlockX(),
@@ -58,7 +58,7 @@ public class OffensiveMeltingBurst extends AbilityOffensive {
                     pos.getY() - 1,
                     pos.getZ() - 1,
                     150, 2, 2, 2, 0D, Type.OFFENSIVE.getDustMedium());
-            super.killEntity();
+            super.a(entity_removalreason);
         }
     }
 

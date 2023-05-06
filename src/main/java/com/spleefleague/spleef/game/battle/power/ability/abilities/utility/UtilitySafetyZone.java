@@ -2,8 +2,8 @@ package com.spleefleague.spleef.game.battle.power.ability.abilities.utility;
 
 import com.comphenix.protocol.wrappers.BlockPosition;
 import com.spleefleague.core.world.FakeBlock;
-import com.spleefleague.core.world.FakeUtils;
-import com.spleefleague.core.world.game.GameWorld;
+import com.spleefleague.core.world.FakeUtil;
+import com.spleefleague.core.world.projectile.game.GameWorld;
 import com.spleefleague.spleef.Spleef;
 import com.spleefleague.spleef.game.battle.power.ability.AbilityStats;
 import com.spleefleague.spleef.game.battle.power.ability.abilities.AbilityUtility;
@@ -38,7 +38,7 @@ public class UtilitySafetyZone extends AbilityUtility {
      */
     @Override
     public boolean onUse() {
-        Set<BlockPosition> blocks = FakeUtils.translateBlocks(FakeUtils.createSphere(RANGE), new BlockPosition(
+        Set<BlockPosition> blocks = FakeUtil.translateBlocks(FakeUtil.createSphere(RANGE), new BlockPosition(
                 getPlayer().getLocation().getBlockX(),
                 getPlayer().getLocation().getBlockY(),
                 getPlayer().getLocation().getBlockZ()));

@@ -13,9 +13,7 @@ import com.spleefleague.core.game.battle.Battle;
 import com.spleefleague.core.game.battle.BattlePlayer;
 import com.spleefleague.core.game.battle.dynamic.DynamicBattle;
 import com.spleefleague.core.player.CorePlayer;
-import com.spleefleague.core.player.collectible.hat.Hat;
-import com.spleefleague.core.player.purse.CoreCurrency;
-import com.spleefleague.core.world.FakeUtils;
+import com.spleefleague.core.world.FakeUtil;
 import com.spleefleague.core.world.build.BuildStructure;
 import com.spleefleague.coreapi.chat.ChatColor;
 import com.spleefleague.spleef.Spleef;
@@ -50,8 +48,8 @@ public class MultiSpleefBattle extends DynamicBattle<MultiSpleefPlayer> {
         BlockPosition origin = getArena().getOrigin().toBlockPosition();
         for (BuildStructure structure : getArena().getStructures()) {
             gameWorld.setBaseBlocks(
-                    FakeUtils.translateBlocks(
-                            FakeUtils.rotateBlocks(structure.getFakeBlocks(), (int) getArena().getOrigin().getYaw()),
+                    FakeUtil.translateBlocks(
+                            FakeUtil.rotateBlocks(structure.getFakeBlocks(), (int) getArena().getOrigin().getYaw()),
                             origin));
         }
     }

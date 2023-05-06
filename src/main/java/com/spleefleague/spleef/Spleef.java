@@ -17,6 +17,7 @@ import com.spleefleague.core.menu.hotbars.main.LeaderboardMenu;
 import com.spleefleague.core.player.CoreDBPlayer;
 import com.spleefleague.core.player.PlayerManager;
 import com.spleefleague.core.plugin.CorePlugin;
+import com.spleefleague.coreapi.chat.ChatColor;
 import com.spleefleague.spleef.commands.*;
 import com.spleefleague.spleef.game.Shovel;
 import com.spleefleague.spleef.game.battle.classic.affix.ClassicSpleefAffixes;
@@ -26,9 +27,8 @@ import com.spleefleague.spleef.game.battle.power.ability.AbilityUtils;
 import com.spleefleague.spleef.game.battle.power.training.PowerTrainingMenu;
 import com.spleefleague.spleef.player.SpleefPlayer;
 import com.spleefleague.spleef.game.SpleefMode;
-import net.md_5.bungee.api.chat.TextComponent;
+import net.kyori.adventure.text.Component;
 import org.bukkit.Bukkit;
-import org.bukkit.ChatColor;
 import org.bukkit.Material;
 
 /**
@@ -156,8 +156,8 @@ public class Spleef extends CorePlugin {
     /**
      * @return Chat Prefix
      */
-    public TextComponent getChatPrefix() {
-        return new TextComponent(Chat.TAG_BRACE + "[" + Chat.TAG + "Spleef" + Chat.TAG_BRACE + "] " + Chat.DEFAULT);
+    public Component getChatPrefix() {
+        return Component.text(Chat.TAG_BRACE + "[" + Chat.TAG + "Spleef" + Chat.TAG_BRACE + "] " + Chat.DEFAULT);
     }
     
 }

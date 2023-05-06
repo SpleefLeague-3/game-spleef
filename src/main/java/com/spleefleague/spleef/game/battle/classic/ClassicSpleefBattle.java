@@ -6,29 +6,21 @@
 
 package com.spleefleague.spleef.game.battle.classic;
 
-import com.spleefleague.core.chat.Chat;
 import com.spleefleague.core.game.Arena;
-import com.spleefleague.core.game.battle.Battle;
-import com.spleefleague.core.game.battle.BattlePlayer;
 import com.spleefleague.core.game.battle.versus.VersusBattle;
 import com.spleefleague.core.player.CorePlayer;
-import com.spleefleague.core.player.collectible.hat.Hat;
-import com.spleefleague.core.player.purse.CoreCurrency;
-import com.spleefleague.core.world.FakeUtils;
+import com.spleefleague.core.world.FakeUtil;
 import com.spleefleague.core.world.build.BuildStructure;
-import com.spleefleague.core.world.build.BuildStructures;
 import com.spleefleague.spleef.Spleef;
 import com.spleefleague.spleef.game.Shovel;
 import com.spleefleague.spleef.game.SpleefMode;
 import com.spleefleague.spleef.game.battle.classic.affix.ClassicSpleefAffix;
 import com.spleefleague.spleef.game.battle.classic.affix.ClassicSpleefAffixes;
-import com.spleefleague.spleef.game.battle.power.PowerSpleefPlayer;
 import com.spleefleague.spleef.util.SpleefUtils;
 import org.bukkit.ChatColor;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
 import java.util.UUID;
 
 /**
@@ -60,8 +52,8 @@ public class ClassicSpleefBattle extends VersusBattle<ClassicSpleefPlayer> {
         randomField = arena.getRandomStructure("spleef:classic");
         if (randomField != null) {
             gameWorld.setBaseBlocks(
-                    FakeUtils.translateBlocks(
-                            FakeUtils.rotateBlocks(randomField.getFakeBlocks(), (int) getArena().getOrigin().getYaw()),
+                    FakeUtil.translateBlocks(
+                            FakeUtil.rotateBlocks(randomField.getFakeBlocks(), (int) getArena().getOrigin().getYaw()),
                             getArena().getOrigin().toBlockPosition()));
         }
         affixes = ClassicSpleefAffixes.startBattle(this);

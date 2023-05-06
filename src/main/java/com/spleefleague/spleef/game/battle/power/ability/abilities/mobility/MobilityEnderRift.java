@@ -1,7 +1,7 @@
 package com.spleefleague.spleef.game.battle.power.ability.abilities.mobility;
 
 import com.comphenix.protocol.wrappers.BlockPosition;
-import com.spleefleague.core.world.game.GameUtils;
+import com.spleefleague.core.world.projectile.game.GameUtils;
 import com.spleefleague.spleef.game.battle.power.ability.AbilityStats;
 import com.spleefleague.spleef.game.battle.power.ability.abilities.AbilityMobility;
 import org.bukkit.Location;

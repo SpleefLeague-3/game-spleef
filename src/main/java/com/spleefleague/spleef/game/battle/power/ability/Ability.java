@@ -1,10 +1,10 @@
 package com.spleefleague.spleef.game.battle.power.ability;
 
+import com.spleefleague.coreapi.chat.ChatColor;
 import com.spleefleague.spleef.game.battle.power.PowerSpleefPlayer;
 import com.spleefleague.spleef.game.battle.power.training.PowerTrainingBattle;
 import com.spleefleague.spleef.game.battle.power.training.PowerTrainingPlayer;
 import joptsimple.internal.Strings;
-import org.bukkit.ChatColor;
 import org.bukkit.Color;
 import org.bukkit.Material;
 import org.bukkit.Particle;
@@ -12,7 +12,6 @@ import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 
 import java.util.function.Consumer;
-import java.util.function.Function;
 
 /**
  * @author NickM13

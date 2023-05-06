@@ -6,6 +6,7 @@
 
 package com.spleefleague.spleef.game;
 
+import com.destroystokyo.paper.Namespaced;
 import com.spleefleague.core.menu.*;
 import com.spleefleague.core.menu.hotbars.main.HeldItemMenu;
 import com.spleefleague.core.player.BattleState;
@@ -18,25 +19,33 @@ import com.spleefleague.coreapi.database.annotation.DBField;
 import com.spleefleague.spleef.Spleef;
 
 import com.spleefleague.spleef.util.SpleefUtils;
-import net.minecraft.server.v1_15_R1.NBTTagCompound;
-import net.minecraft.server.v1_15_R1.NBTTagList;
-import net.minecraft.server.v1_15_R1.NBTTagString;
+import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.nbt.NBTTagList;
 import org.bukkit.Material;
-import org.bukkit.Particle;
-import org.bukkit.craftbukkit.v1_15_R1.inventory.CraftItemStack;
+import org.bukkit.NamespacedKey;
+import org.bukkit.craftbukkit.v1_19_R3.inventory.CraftItemStack;
 import org.bukkit.enchantments.Enchantment;
+import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
+import se.llbit.nbt.CompoundTag;
+import se.llbit.nbt.ListTag;
+import se.llbit.nbt.StringTag;
+
+import java.util.Collection;
+import java.util.HashSet;
 
 /**
  * @author NickM13
  */
 public class Shovel extends Holdable {
 
-    private static NBTTagList canDestroyTags = new NBTTagList();
+    private static final Collection<Namespaced> destroyableKeys = new HashSet<>();
     
     public static void init() {
-        SpleefUtils.breakableBlocks.forEach(mat -> canDestroyTags.add(NBTTagString.a("minecraft:" + mat.name().toLowerCase())));
+        for (Material material : SpleefUtils.breakableBlocks) {
+            destroyableKeys.add(material.getKey());
+        }
         
         Vendorable.registerParentType(Shovel.class);
 
@@ -135,15 +144,15 @@ public class Shovel extends Holdable {
      * @return Shovel ItemStack
      */
     public static ItemStack getGameItem(ItemStack activeDisplayItem) {
-        net.minecraft.server.v1_15_R1.ItemStack nmsItemStack = CraftItemStack.asNMSCopy(activeDisplayItem);
-        NBTTagCompound tagCompound = nmsItemStack.hasTag() ? nmsItemStack.getTag() : new NBTTagCompound();
-        tagCompound.set("CanDestroy", canDestroyTags);
-        nmsItemStack.setTag(tagCompound);
-
-        ItemStack itemStack = CraftItemStack.asBukkitCopy(nmsItemStack);
+        ItemStack itemStack = activeDisplayItem.clone();
         ItemMeta itemMeta = itemStack.getItemMeta();
-        if (itemMeta != null) itemMeta.addEnchant(Enchantment.DIG_SPEED, 9, true);
-        itemStack.setItemMeta(itemMeta);
+        if (itemMeta != null) {
+            itemMeta.addEnchant(Enchantment.DIG_SPEED, 9, true);
+            itemMeta.setDestroyableKeys(destroyableKeys);
+            //itemMeta.addItemFlags(ItemFlag.HIDE_DESTROYS);
+            itemMeta.addItemFlags(ItemFlag.HIDE_ENCHANTS);
+            itemStack.setItemMeta(itemMeta);
+        }
         return itemStack;
     }
     

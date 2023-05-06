@@ -1,9 +1,7 @@
 package com.spleefleague.spleef.game.effects;
 
 import com.spleefleague.core.player.CorePlayer;
-import com.spleefleague.core.world.global.GlobalWorld;
-import org.bukkit.Location;
-import org.bukkit.craftbukkit.v1_15_R1.entity.CraftPlayer;
+import com.spleefleague.core.world.projectile.global.GlobalWorld;
 import org.bukkit.entity.Player;
 
 /**

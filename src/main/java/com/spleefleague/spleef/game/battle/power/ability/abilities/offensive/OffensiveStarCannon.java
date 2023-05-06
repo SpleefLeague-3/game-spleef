@@ -1,7 +1,7 @@
 package com.spleefleague.spleef.game.battle.power.ability.abilities.offensive;
 
 import com.google.common.collect.Lists;
-import com.spleefleague.core.world.game.projectile.ProjectileStats;
+import com.spleefleague.core.world.projectile.ProjectileStats;
 import com.spleefleague.spleef.game.battle.power.ability.AbilityStats;
 import com.spleefleague.spleef.game.battle.power.ability.abilities.AbilityOffensive;
 import org.bukkit.Sound;
@@ -22,7 +22,7 @@ public class OffensiveStarCannon extends AbilityOffensive {
 
     private static final int COUNT = 15;
 
-    private static ProjectileStats boltStats = new ProjectileStats();
+    private static final ProjectileStats boltStats = new ProjectileStats();
 
     static {
         boltStats.customModelDatas = Lists.newArrayList(1);

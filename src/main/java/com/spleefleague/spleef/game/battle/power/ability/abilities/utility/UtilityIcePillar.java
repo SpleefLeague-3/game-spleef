@@ -1,22 +1,16 @@
 package com.spleefleague.spleef.game.battle.power.ability.abilities.utility;
 
 import com.comphenix.protocol.wrappers.BlockPosition;
-import com.spleefleague.core.game.battle.BattlePlayer;
 import com.spleefleague.core.world.FakeBlock;
-import com.spleefleague.core.world.FakeUtils;
+import com.spleefleague.core.world.FakeUtil;
 import com.spleefleague.core.world.build.BuildStructure;
 import com.spleefleague.core.world.build.BuildStructures;
-import com.spleefleague.core.world.game.GameUtils;
-import com.spleefleague.core.world.game.GameWorld;
-import com.spleefleague.spleef.Spleef;
-import com.spleefleague.spleef.game.battle.power.PowerSpleefPlayer;
+import com.spleefleague.core.world.projectile.game.GameWorld;
 import com.spleefleague.spleef.game.battle.power.ability.AbilityStats;
 import com.spleefleague.spleef.game.battle.power.ability.AbilityUtils;
 import com.spleefleague.spleef.game.battle.power.ability.abilities.AbilityUtility;
-import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.Sound;
-import org.bukkit.potion.PotionEffectType;
 import org.bukkit.util.Vector;
 
 import java.util.Map;
@@ -44,7 +38,7 @@ public class UtilityIcePillar extends AbilityUtility {
     public boolean onUse() {
         BuildStructure structure = BuildStructures.get("power:icepillar");
         GameWorld gameWorld = getUser().getBattle().getGameWorld();
-        if (FakeUtils.isOnGround(getUser().getCorePlayer())) {
+        if (FakeUtil.isOnGround(getUser().getCorePlayer())) {
             BlockPosition blockPos = new BlockPosition(
                     (int) Math.round(getPlayer().getLocation().getX()),
                     getPlayer().getLocation().getBlockY(),

@@ -1,7 +1,7 @@
 package com.spleefleague.spleef.game.effects;
 
 import com.comphenix.protocol.wrappers.BlockPosition;
-import com.spleefleague.core.world.global.GlobalWorld;
+import com.spleefleague.core.world.projectile.global.GlobalWorld;
 import org.bukkit.Color;
 import org.bukkit.Location;
 import org.bukkit.Particle;
@@ -57,12 +57,8 @@ public class EffectFlamePhoenix {
                 for (int i = 0; i < line.length(); i++) {
                     char c = line.charAt(i);
                     switch (c) {
-                        case '1':
-                            dust.add(new Vector(hpos, vpos, 0));
-                            break;
-                        case '2':
-                            fire.add(new Vector(hpos, vpos, 0));
-                            break;
+                        case '1' -> dust.add(new Vector(hpos, vpos, 0));
+                        case '2' -> fire.add(new Vector(hpos, vpos, 0));
                     }
                     hpos += OFFSET;
                 }

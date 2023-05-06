@@ -4,21 +4,18 @@ import com.comphenix.protocol.wrappers.BlockPosition;
 import com.spleefleague.core.util.variable.BlockRaycastResult;
 import com.spleefleague.core.util.variable.Point;
 import com.spleefleague.core.world.FakeBlock;
-import com.spleefleague.core.world.FakeUtils;
+import com.spleefleague.core.world.FakeUtil;
 import com.spleefleague.core.world.FakeWorld;
 import com.spleefleague.core.world.build.BuildStructure;
 import com.spleefleague.core.world.build.BuildStructures;
-import com.spleefleague.core.world.game.GameWorld;
+import com.spleefleague.core.world.projectile.game.GameWorld;
 import com.spleefleague.spleef.game.battle.power.ability.AbilityStats;
 import com.spleefleague.spleef.game.battle.power.ability.abilities.AbilityUtility;
-import org.bukkit.Material;
 import org.bukkit.Particle;
 import org.bukkit.World;
 
 import java.util.Iterator;
-import java.util.Map;
 import java.util.Random;
-import java.util.Set;
 
 /**
  * @author NickM13
@@ -48,16 +45,16 @@ public class UtilityWall extends AbilityUtility {
         while (results.hasNext()) {
             BlockRaycastResult result = results.next();
             FakeBlock fakeBlock = gameWorld.getFakeBlock(result.getBlockPos());
-            if ((fakeBlock != null && !fakeBlock.getBlockData().getMaterial().isAir()) ||
+            if ((fakeBlock != null && !fakeBlock.blockData().getMaterial().isAir()) ||
                     !world.getBlockAt(result.getBlockPos().getX(), result.getBlockPos().getY(), result.getBlockPos().getZ()).getType().isAir()) {
-                gameWorld.replaceAir(FakeUtils.translateBlocks(FakeUtils.rotateBlocks(
+                gameWorld.replaceAir(FakeUtil.translateBlocks(FakeUtil.rotateBlocks(
                         structure.getFakeBlocks(), Math.round(getPlayer().getLocation().getYaw() / 45) * 45),
                         result.getBlockPos()));
                 return true;
             }
             Random rand = new Random();
             if (!results.hasNext()) {
-                for (BlockPosition pos : gameWorld.replaceAir(FakeUtils.translateBlocks(FakeUtils.rotateBlocks(
+                for (BlockPosition pos : gameWorld.replaceAir(FakeUtil.translateBlocks(FakeUtil.rotateBlocks(
                         structure.getFakeBlocks(), Math.round(getPlayer().getLocation().getYaw() / 45) * 45),
                         result.getBlockPos()))) {
                     gameWorld.setBlockDelayed(pos, FakeWorld.AIR, rand.nextInt() % 20 + 30);
